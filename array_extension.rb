@@ -1,37 +1,8 @@
+#authors: Reiko Watanabe, Ayesha Azam (Group 6)
+
 	class Array
 		def select_first(args)
-=begin
-			res = nil
-			keys_array = nil
-			arr = false
-			if args.values.first.class  == Array 
-				keys_array= args.values.first
-				arr = true
-			end 
-			
-			each do |ele|
-			    if arr == true #if array
-			 		keys_array.each do |num|
-			 			puts num
-						if ele.send(args.keys.first) == num
-						#res = ele
-						#break
-							return ele
-						end
-					end
-				elsif  (args.has_key? :name) && (args.has_key? :interval) 
-					if (args.has_key? :min) && (args.has_key? :max)
-						min = args[:interval][:min]
-			            max = args[:interval][:max]
-			            puts min, max
-			        end
-				elsif ele.send(args.keys.first) == args.values.first #if not array 
-					return ele
-				
-				end
-			#res
-		    end
-=end
+
 			if args.keys.include? :interval
 				if args[:interval].include? :min
 					detect do |v|
@@ -62,14 +33,8 @@
 		 else
 				key = args.keys.first.to_sym
 				select { |v| Array(args[key]).include? v.send(key) }
-		 end
-			
-		#:name => 'Tobias'
-		#:name => ['Tobias', 'Johan'] 
-		#:name => :age, :interval => { :min => 30, :max => 32 } 
-			
+		 end		
 		end
-	 end
 
 		def method_missing(symbol,*args) #*args is array
 			if symbol.id2name =~ /^select_(first|all)_where_(\w*)_is$/
@@ -91,9 +56,6 @@
 			else
 				return super #returning method_missing
 			end
-			
-	 	 	
-	 	#select_first(args) 
-	 	#select_all(args)
 	 end 
-	
+
+end
